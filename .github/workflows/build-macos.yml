@@ -22,11 +22,14 @@ jobs:
         run: cmake --build build --config Release --parallel 4
 
       - name: Make .pkg installer and plug-in zip
+        id: pkg
         env:
           INSTALLER_SIGN_ID: ${{ secrets.INSTALLER_SIGN_ID }}
         run: |
           VERSION=$(grep -m1 -oE 'VERSION [0-9]+\.[0-9]+\.[0-9]+' CMakeLists.txt | cut -d' ' -f2)
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
           bash packaging/make_pkg.sh build "$VERSION" | tee pkg.log
+          (cd build/installer/plugins/*/VST3 && ditto -c -k --sequesterRsrc --keepParent BrewVerb.vst3 "$GITHUB_WORKSPACE/build/installer/BrewVerb-$VERSION-macOS-VST3.zip")
           {
             echo "## BrewVerb $VERSION"
             echo
@@ -55,10 +58,25 @@ jobs:
           name: BrewVerb-macOS-plugins
           path: build/installer/BrewVerb-*-macOS-plugins.zip
 
-      - name: Attach to GitHub Release (tags only)
-        if: startsWith(github.ref, 'refs/tags/v')
+      - name: Publish downloads as a GitHub Release
+        if: github.event_name != 'pull_request'
         uses: softprops/action-gh-release@v2
         with:
+          tag_name: v${{ steps.pkg.outputs.version }}
+          name: BrewVerb ${{ steps.pkg.outputs.version }}
+          make_latest: true
+          body: |
+            Open-source convolution reverb by Sound Brewery Studio. macOS, Apple Silicon + Intel.
+
+            | File | What it is |
+            |---|---|
+            | **BrewVerb-${{ steps.pkg.outputs.version }}-macOS.pkg** | Installer with checkboxes for AU, VST3, AAX and Standalone. Recommended. |
+            | **BrewVerb-${{ steps.pkg.outputs.version }}-macOS-plugins.zip** | Plug-in files for manual install: AU, VST3, AAX |
+            | **BrewVerb-${{ steps.pkg.outputs.version }}-macOS-VST3.zip** | Only BrewVerb.vst3 |
+
+            If macOS blocks the installer: System Settings > Privacy & Security > Open Anyway.
+            Retail Pro Tools needs the AAX signed with PACE first (see docs/PRO_TOOLS_SIGNING.md).
           files: |
             build/installer/BrewVerb-*-macOS.pkg
             build/installer/BrewVerb-*-macOS-plugins.zip
+            build/installer/BrewVerb-*-macOS-VST3.zip
