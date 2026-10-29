@@ -6,6 +6,9 @@ on:
     branches: [ main ]
     tags: [ 'v*' ]
 
+permissions:
+  contents: write   # lets tagged builds publish a GitHub Release
+
 jobs:
   build:
     runs-on: macos-14
