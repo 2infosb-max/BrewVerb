@@ -1,0 +1,61 @@
+name: Build macOS installer
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+    tags: [ 'v*' ]
+
+jobs:
+  build:
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure (universal arm64 + x86_64)
+        run: cmake -B build -DCMAKE_BUILD_TYPE=Release -DCMAKE_OSX_ARCHITECTURES="arm64;x86_64"
+
+      - name: Build AAX / AU / VST3 / VST (if SDK present) / Standalone
+        run: cmake --build build --config Release --parallel 4
+
+      - name: Make .pkg installer and plug-in zip
+        env:
+          INSTALLER_SIGN_ID: ${{ secrets.INSTALLER_SIGN_ID }}
+        run: |
+          VERSION=$(grep -m1 -oE 'VERSION [0-9]+\.[0-9]+\.[0-9]+' CMakeLists.txt | cut -d' ' -f2)
+          bash packaging/make_pkg.sh build "$VERSION" | tee pkg.log
+          {
+            echo "## BrewVerb $VERSION"
+            echo
+            echo "Formats built: \`$(grep 'Formats packaged' pkg.log | cut -d: -f2)\`"
+            if ! grep -q ' vst ' <<< " $(grep 'Formats packaged' pkg.log | cut -d: -f2) "; then
+              echo
+              echo "VST (VST2) was not built because no VST2 SDK is in the repository. See docs/VST2.md."
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload installer (.pkg)
+        uses: actions/upload-artifact@v4
+        with:
+          name: BrewVerb-macOS-installer
+          path: build/installer/BrewVerb-*-macOS.pkg
+
+      - name: Upload VST3 only (BrewVerb.vst3)
+        uses: actions/upload-artifact@v4
+        with:
+          name: BrewVerb-VST3-macOS
+          path: build/installer/plugins/*/VST3/BrewVerb.vst3
+
+      - name: Upload plug-ins (.zip for manual install)
+        uses: actions/upload-artifact@v4
+        with:
+          name: BrewVerb-macOS-plugins
+          path: build/installer/BrewVerb-*-macOS-plugins.zip
+
+      - name: Attach to GitHub Release (tags only)
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            build/installer/BrewVerb-*-macOS.pkg
+            build/installer/BrewVerb-*-macOS-plugins.zip

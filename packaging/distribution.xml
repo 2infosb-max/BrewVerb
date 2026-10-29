@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<installer-gui-script minSpecVersion="2">
+    <title>BrewVerb @VERSION@</title>
+    <organization>com.soundbrewery</organization>
+    <welcome file="welcome.html" mime-type="text/html"/>
+    <license file="LICENSE.txt"/>
+    <options customize="always" require-scripts="false" hostArchitectures="arm64,x86_64"/>
+    <domains enable_localSystem="true"/>
+
+    <choices-outline>
+@CHOICES_OUTLINE@
+    </choices-outline>
+
+@CHOICES@
+@PKGREFS@
+</installer-gui-script>

@@ -1,0 +1,17 @@
+BrewVerb - manual install (no installer needed)
+
+Copy each plug-in into the matching folder, then restart your audio software.
+
+  AU    BrewVerb.component    ->  Macintosh HD / Library / Audio / Plug-Ins / Components
+  VST3  BrewVerb.vst3         ->  Macintosh HD / Library / Audio / Plug-Ins / VST3
+  VST   BrewVerb.vst          ->  Macintosh HD / Library / Audio / Plug-Ins / VST
+  AAX   BrewVerb.aaxplugin    ->  Macintosh HD / Library / Application Support / Avid / Audio / Plug-Ins
+
+To open these folders in Finder: click Go in the menu bar > Go to Folder..., paste the path
+(for example  /Library/Audio/Plug-Ins/VST3 ) and press Return. Drag the file in; macOS may ask
+for your password.
+
+If your DAW does not show BrewVerb, rescan plug-ins in its settings (Logic: Plug-in Manager >
+Reset & Rescan Selection).
+
+Open source (GPLv3). Sound Brewery Studio.
