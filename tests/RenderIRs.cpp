@@ -257,8 +257,6 @@ int main (int argc, char** argv)
             if (lib.getEntry (i).displayName() == "Kerala Church - Near") church = i;
         const auto err = p.loadLibraryIR (juce::jmax (0, church));
         p.prepareToPlay (48000.0, 512);
-        juce::Thread::sleep (400);
-        juce::MessageManager::getInstance()->runDispatchLoopUntil (300);
         juce::AudioBuffer<float> buf (2, 512); juce::MidiBuffer midi;
         float peak = 0.0f;
         for (int b = 0; b < 200; ++b)
@@ -280,7 +278,6 @@ int main (int argc, char** argv)
         {
             std::unique_ptr<juce::AudioProcessorEditor> ed (p.createEditor());
             ed->setVisible (true);
-            juce::MessageManager::getInstance()->runDispatchLoopUntil (200);
             juce::PNGImageFormat png; auto f = outDir.getChildFile ("ui_library.png"); f.deleteFile();
             if (auto os = f.createOutputStream()) png.writeImageToStream (ed->createComponentSnapshot (ed->getLocalBounds(), true, 1.0f), *os);
         }

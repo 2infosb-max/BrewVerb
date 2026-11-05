@@ -224,17 +224,17 @@ SpaceView::SpaceView (BrewVerbProcessor& p) : proc (p)
 
 void SpaceView::step (int delta)
 {
-    const int builtIn = brew::getNumSpaces();
-    const int total = builtIn + brew::IRLibrary::get().getNumEntries();
+    const int numBuiltIn = brew::getNumSpaces();
+    const int total = numBuiltIn + brew::IRLibrary::get().getNumEntries();
     int current = proc.getCurrentSpace();
     if (proc.hasUserIR())
     {
         const int lib = proc.getLibraryIndex();
-        current = lib >= 0 ? builtIn + lib : (delta > 0 ? builtIn - 1 : 0);   // other files: jump back into the list
+        current = lib >= 0 ? numBuiltIn + lib : (delta > 0 ? numBuiltIn - 1 : 0);   // other files: jump back into the list
     }
     const int target = (current + delta + total) % total;
-    if (target < builtIn) { if (onSelectSpace) onSelectSpace (target); }
-    else if (onSelectLibrary) onSelectLibrary (target - builtIn);
+    if (target < numBuiltIn) { if (onSelectSpace) onSelectSpace (target); }
+    else if (onSelectLibrary) onSelectLibrary (target - numBuiltIn);
 }
 
 const juce::Image& SpaceView::currentPicture()
@@ -411,10 +411,10 @@ void SpaceView::mouseUp (const juce::MouseEvent& e)
         juce::PopupMenu sub;
         for (int i = 0; i < lib.getNumEntries(); ++i)
         {
-            const auto e = lib.getEntry (i);
-            if (e.category != c) continue;
+            const auto entry = lib.getEntry (i);
+            if (entry.category != c) continue;
             sub.addItem (libraryIdBase + i,
-                         e.displayName() + (e.rt60 > 0.0f ? "   (" + juce::String (e.rt60, 1) + " s)" : juce::String()),
+                         entry.displayName() + (entry.rt60 > 0.0f ? "   (" + juce::String (entry.rt60, 1) + " s)" : juce::String()),
                          true, i == currentLib);
         }
         menu.addSubMenu (c, sub, true, nullptr, currentLib >= 0 && lib.getEntry (currentLib).category == c);
