@@ -13,6 +13,13 @@ namespace
                                      ParamID::attack, ParamID::early, ParamID::tail, ParamID::posx,
                                      ParamID::posdist, ParamID::length, ParamID::reverse };
 
+    // Library IRs show their space name ("Kerala Church - Near"), other files their file name
+    juce::String irDisplayName (const juce::File& f)
+    {
+        const int i = brew::IRLibrary::get().indexOf (f);
+        return i >= 0 ? brew::IRLibrary::get().getEntry (i).displayName() : f.getFileNameWithoutExtension();
+    }
+
     bool isIRParam (const juce::String& id)
     {
         for (auto* p : irParams)
@@ -383,7 +390,7 @@ void BrewVerbProcessor::launchRebuild (bool synchronous)
         const juce::ScopedLock sl (irLock);
         src = userIR;
         srcRate = userIRRate;
-        name = src != nullptr ? userIRFile.getFileNameWithoutExtension()
+        name = src != nullptr ? irDisplayName (userIRFile)
                               : brew::getSpaceNames()[s.space];
     }
 
@@ -509,8 +516,27 @@ bool BrewVerbProcessor::hasUserIR() const
 juce::String BrewVerbProcessor::getSourceName() const
 {
     const juce::ScopedLock sl (irLock);
-    return userIR != nullptr ? userIRFile.getFileNameWithoutExtension()
+    return userIR != nullptr ? irDisplayName (userIRFile)
                              : brew::getSpaceNames()[juce::roundToInt (pSpace->load())];
+}
+
+juce::File BrewVerbProcessor::getUserIRFile() const
+{
+    const juce::ScopedLock sl (irLock);
+    return userIR != nullptr ? userIRFile : juce::File();
+}
+
+juce::String BrewVerbProcessor::loadLibraryIR (int index)
+{
+    const auto e = brew::IRLibrary::get().getEntry (index);
+    if (! e.file.existsAsFile())
+        return "That library impulse response is missing. Reinstall the Sound Brewery IR Library.";
+    return loadUserIR (e.file);
+}
+
+int BrewVerbProcessor::getLibraryIndex() const
+{
+    return brew::IRLibrary::get().indexOf (getUserIRFile());
 }
 
 //==============================================================================
@@ -598,7 +624,7 @@ void BrewVerbProcessor::recallSnapshot (int slot)
         const juce::String irPath = snap.getProperty ("userIR").toString();
         if (irPath.isNotEmpty() && juce::File (irPath).existsAsFile())
         {
-            if (! hasUserIR() || getSourceName() != juce::File (irPath).getFileNameWithoutExtension())
+            if (getUserIRFile() != juce::File (irPath))
                 loadUserIR (juce::File (irPath));
         }
         else if (hasUserIR())

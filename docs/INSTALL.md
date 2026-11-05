@@ -20,7 +20,7 @@ build the `.pkg` for you. You only click buttons in your web browser.
 3. Click **Build macOS installer** in the left list → **Run workflow** → green **Run workflow** button.
 4. Wait about 10 to 15 minutes until the run shows a green tick.
 5. Click the finished run. The summary at the top lists the formats built. Under **Artifacts** there are two downloads:
-   - **BrewVerb-macOS-installer**: the installer (**BrewVerb-1.1.0-macOS.pkg**), the easiest option.
+   - **BrewVerb-macOS-installer**: the installer (**BrewVerb-1.2.0-macOS.pkg**), the easiest option.
    - **BrewVerb-VST3-macOS**: only **BrewVerb.vst3**. Unzip it and drag BrewVerb.vst3 into
      **Macintosh HD → Library → Audio → Plug-Ins → VST3** (in Finder: **Go → Go to Folder…**, type `/Library/Audio/Plug-Ins/VST3`, press Return).
    - **BrewVerb-macOS-plugins**: the plug-in files (AU, VST3, VST, AAX) to copy by hand. A how-to file is included.

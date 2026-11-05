@@ -5,8 +5,11 @@
 */
 #include "PluginEditor.h"
 #include "SpaceArt.h"
+#include "IRLibrary.h"
 
 using namespace brewui;
+
+namespace { constexpr int libraryIdBase = 2000; }
 
 //==============================================================================
 LookAndFeel::LookAndFeel()
@@ -211,17 +214,39 @@ SpaceView::SpaceView (BrewVerbProcessor& p) : proc (p)
     prev.setTooltip ("Previous space");
     next.setTooltip ("Next space");
 
-    auto step = [this] (int delta)
-    {
-        const int n = brew::getNumSpaces();
-        if (onSelectSpace) onSelectSpace ((proc.getCurrentSpace() + delta + n) % n);
-    };
-    prev.onClick = [step] { step (-1); };
-    next.onClick = [step] { step (1); };
+    prev.onClick = [this] { step (-1); };
+    next.onClick = [this] { step (1); };
     load.onClick = [this] { if (onLoadIR) onLoadIR(); };
     builtIn.onClick = [this] { if (onBuiltIn) onBuiltIn(); };
 
     display = proc.getDisplay();
+}
+
+void SpaceView::step (int delta)
+{
+    const int builtIn = brew::getNumSpaces();
+    const int total = builtIn + brew::IRLibrary::get().getNumEntries();
+    int current = proc.getCurrentSpace();
+    if (proc.hasUserIR())
+    {
+        const int lib = proc.getLibraryIndex();
+        current = lib >= 0 ? builtIn + lib : (delta > 0 ? builtIn - 1 : 0);   // other files: jump back into the list
+    }
+    const int target = (current + delta + total) % total;
+    if (target < builtIn) { if (onSelectSpace) onSelectSpace (target); }
+    else if (onSelectLibrary) onSelectLibrary (target - builtIn);
+}
+
+const juce::Image& SpaceView::currentPicture()
+{
+    const auto f = proc.getUserIRFile();
+    if (f != pictureFor)
+    {
+        pictureFor = f;
+        auto& lib = brew::IRLibrary::get();
+        picture = lib.getPicture (lib.findPictureFor (f));
+    }
+    return picture;
 }
 
 void SpaceView::resized()
@@ -254,6 +279,11 @@ void SpaceView::paint (juce::Graphics& g)
         if (! user)
         {
             drawSpaceArt (g, bounds, info, size, posX, dist);
+        }
+        else if (const auto& pic = currentPicture(); pic.isValid())
+        {
+            // library IR (or an IR with a picture next to it): show the space
+            g.drawImage (pic, bounds, juce::RectanglePlacement::centred | juce::RectanglePlacement::fillDestination);
         }
         else
         {
@@ -295,7 +325,17 @@ void SpaceView::paint (juce::Graphics& g)
         g.drawFittedText (name, nameArea.withTrimmedBottom (2), juce::Justification::centred, 1);
 
         juce::String sub;
-        if (user)
+        const int libIndex = user ? proc.getLibraryIndex() : -1;
+        if (libIndex >= 0)
+        {
+            const auto e = brew::IRLibrary::get().getEntry (libIndex);
+            const float sz = size;
+            auto m = [sz] (float v) { return juce::String (v * sz, v * sz < 10.0f ? 1 : 0); };
+            sub = e.category + "  /  " + (e.width > 0.0f ? m (e.width) + " x " + m (e.depth) + " x " + m (e.height) + " m"
+                                                           : juce::String ("Open air"))
+                + "  (" + juce::String (display.rt60, 1) + " s)";
+        }
+        else if (user)
             sub = "User impulse response  /  RT60 " + juce::String (display.rt60, 2) + " s";
         else
         {
@@ -311,7 +351,7 @@ void SpaceView::paint (juce::Graphics& g)
 
         g.setColour (Colours::text.withAlpha (0.45f));
         g.setFont (juce::FontOptions (11.0f));
-        g.drawText ("1.1", bounds.withTop (bounds.getBottom() - 22.0f).withTrimmedLeft (bounds.getWidth() - 40.0f), juce::Justification::centred);
+        g.drawText ("1.2", bounds.withTop (bounds.getBottom() - 22.0f).withTrimmedLeft (bounds.getWidth() - 40.0f), juce::Justification::centred);
 
         if (dragOver)
         {
@@ -357,6 +397,29 @@ void SpaceView::mouseUp (const juce::MouseEvent& e)
         }
         menu.addSubMenu (c, sub);
     }
+
+    // Sound Brewery IR Library (recorded-style IRs with pictures)
+    auto& lib = brew::IRLibrary::get();
+    lib.rescan();   // picks up anything added since the plug-in opened
+    menu.addSeparator();
+    menu.addSectionHeader ("SOUND BREWERY IR LIBRARY");
+    const int currentLib = proc.getLibraryIndex();
+    if (lib.getNumEntries() == 0)
+        menu.addItem (999, "Not installed (run the BrewVerb installer and tick IR Library)", false);
+    for (auto& c : lib.getCategories())
+    {
+        juce::PopupMenu sub;
+        for (int i = 0; i < lib.getNumEntries(); ++i)
+        {
+            const auto e = lib.getEntry (i);
+            if (e.category != c) continue;
+            sub.addItem (libraryIdBase + i,
+                         e.displayName() + (e.rt60 > 0.0f ? "   (" + juce::String (e.rt60, 1) + " s)" : juce::String()),
+                         true, i == currentLib);
+        }
+        menu.addSubMenu (c, sub, true, nullptr, currentLib >= 0 && lib.getEntry (currentLib).category == c);
+    }
+
     menu.addSeparator();
     menu.addItem (1000, "Load impulse response file...");
 
@@ -364,6 +427,7 @@ void SpaceView::mouseUp (const juce::MouseEvent& e)
                         [this] (int result)
                         {
                             if (result == 1000) { if (onLoadIR) onLoadIR(); }
+                            else if (result >= libraryIdBase) { if (onSelectLibrary) onSelectLibrary (result - libraryIdBase); }
                             else if (result > 0 && onSelectSpace) onSelectSpace (result - 1);
                         });
 }
@@ -560,6 +624,7 @@ BrewVerbEditor::BrewVerbEditor (BrewVerbProcessor& p)
         addAndMakeVisible (*k);
 
     spaceView.onSelectSpace = [this] (int i) { selectSpace (i); };
+    spaceView.onSelectLibrary = [this] (int i) { selectLibrary (i); };
     spaceView.onBuiltIn = [this]
     {
         proc.clearUserIR();
@@ -644,9 +709,12 @@ BrewVerbEditor::BrewVerbEditor (BrewVerbProcessor& p)
 
     statusLabel.setFont (juce::FontOptions (12.0f));
     statusLabel.setColour (juce::Label::textColourId, Colours::dim);
-    statusLabel.setText (proc.hasUserIR() ? "User impulse response loaded. Drag a new file onto the picture to replace it."
-                                          : brew::getSpaceDescription (proc.getCurrentSpace()),
-                         juce::dontSendNotification);
+    if (const int li = proc.getLibraryIndex(); li >= 0)
+        statusLabel.setText (brew::IRLibrary::get().getEntry (li).description, juce::dontSendNotification);
+    else
+        statusLabel.setText (proc.hasUserIR() ? "User impulse response loaded. Drag a new file onto the picture to replace it."
+                                              : brew::getSpaceDescription (proc.getCurrentSpace()),
+                             juce::dontSendNotification);
     addAndMakeVisible (statusLabel);
 
     proc.addChangeListener (this);
@@ -687,6 +755,15 @@ void BrewVerbEditor::selectSpace (int index)
     }
     statusLabel.setColour (juce::Label::textColourId, Colours::dim);
     statusLabel.setText (brew::getSpaceDescription (index), juce::dontSendNotification);
+    spaceView.repaint();
+}
+
+void BrewVerbEditor::selectLibrary (int index)
+{
+    const auto e = brew::IRLibrary::get().getEntry (index);
+    const auto err = proc.loadLibraryIR (index);
+    statusLabel.setColour (juce::Label::textColourId, err.isNotEmpty() ? Colours::copper : Colours::dim);
+    statusLabel.setText (err.isNotEmpty() ? err : e.description, juce::dontSendNotification);
     spaceView.repaint();
 }
 
@@ -744,7 +821,7 @@ void BrewVerbEditor::timerCallback()
     const auto key = juce::String (proc.getCurrentSpace()) + "|" + juce::String (proc.apvts.getRawParameterValue (ParamID::size)->load())
                    + "|" + juce::String (proc.apvts.getRawParameterValue (ParamID::posx)->load())
                    + "|" + juce::String (proc.apvts.getRawParameterValue (ParamID::posdist)->load())
-                   + "|" + juce::String ((int) proc.hasUserIR());
+                   + "|" + proc.getUserIRFile().getFullPathName();
     if (key != spaceView.getProperties()["key"].toString())
     {
         spaceView.getProperties().set ("key", key);

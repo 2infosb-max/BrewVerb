@@ -7,6 +7,9 @@ Copy each plug-in into the matching folder, then restart your audio software.
   VST   BrewVerb.vst          ->  Macintosh HD / Library / Audio / Plug-Ins / VST
   AAX   BrewVerb.aaxplugin    ->  Macintosh HD / Library / Application Support / Avid / Audio / Plug-Ins
 
+  IR Library (folder)   ->  Macintosh HD / Library / Application Support / Sound Brewery / BrewVerb
+                            (create the "Sound Brewery" and "BrewVerb" folders if they are not there)
+
 To open these folders in Finder: click Go in the menu bar > Go to Folder..., paste the path
 (for example  /Library/Audio/Plug-Ins/VST3 ) and press Return. Drag the file in; macOS may ask
 for your password.

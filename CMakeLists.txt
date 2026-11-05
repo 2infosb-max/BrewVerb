@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 3.22)
 set(CMAKE_OSX_ARCHITECTURES "arm64;x86_64" CACHE STRING "")
 set(CMAKE_OSX_DEPLOYMENT_TARGET "10.13" CACHE STRING "")
 
-project(BrewVerb VERSION 1.1.0 LANGUAGES C CXX)
+project(BrewVerb VERSION 1.2.0 LANGUAGES C CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -78,7 +78,8 @@ target_sources(BrewVerb PRIVATE
     Source/IRGenerator.cpp
     Source/PluginProcessor.cpp
     Source/PluginEditor.cpp
-    Source/SpaceArt.cpp)
+    Source/SpaceArt.cpp
+    Source/IRLibrary.cpp)
 
 target_include_directories(BrewVerb PRIVATE Source)
 
@@ -103,7 +104,7 @@ option(BREWVERB_BUILD_TESTS "Build the offline IR render test" OFF)
 if(BREWVERB_BUILD_TESTS)
     juce_add_console_app(BrewVerbIRTest PRODUCT_NAME "BrewVerbIRTest")
     target_sources(BrewVerbIRTest PRIVATE tests/RenderIRs.cpp Source/IRGenerator.cpp
-        Source/PluginProcessor.cpp Source/PluginEditor.cpp Source/SpaceArt.cpp)
+        Source/PluginProcessor.cpp Source/PluginEditor.cpp Source/SpaceArt.cpp Source/IRLibrary.cpp)
     target_include_directories(BrewVerbIRTest PRIVATE Source)
     target_compile_definitions(BrewVerbIRTest PRIVATE JUCE_WEB_BROWSER=0 JUCE_USE_CURL=0)
     target_link_libraries(BrewVerbIRTest PRIVATE juce::juce_audio_utils juce::juce_audio_formats juce::juce_dsp

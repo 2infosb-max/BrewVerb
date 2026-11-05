@@ -59,7 +59,10 @@ namespace brewui
         void refresh() { display = proc.getDisplay(); repaint(); }
 
         std::function<void()> onLoadIR, onBuiltIn;
-        std::function<void (int)> onSelectSpace;
+        std::function<void (int)> onSelectSpace, onSelectLibrary;
+
+        /** Built-in spaces first, then the IR Library: one list for the < > buttons. */
+        void step (int delta);
 
     private:
         BrewVerbProcessor& proc;
@@ -67,6 +70,9 @@ namespace brewui
         juce::TextButton prev { "<" }, next { ">" }, load { "LOAD IR" }, builtIn { "BUILT-IN" };
         juce::Rectangle<int> nameArea;
         bool dragOver = false;
+        juce::File pictureFor;      // IR file the cached picture belongs to
+        juce::Image picture;
+        const juce::Image& currentPicture();
     };
 
     /** Top-down stage: drag the source (speaker) around in front of the listener. */
@@ -124,6 +130,7 @@ private:
     void timerCallback() override;
     void loadIR (const juce::File&);
     void selectSpace (int index);
+    void selectLibrary (int index);
     bool tabIsModified (int tab) const;
 
     using Knob = brewui::Knob;

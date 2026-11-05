@@ -9,6 +9,7 @@
 #include <juce_audio_formats/juce_audio_formats.h>
 #include <juce_dsp/juce_dsp.h>
 #include "IRGenerator.h"
+#include "IRLibrary.h"
 
 namespace ParamID
 {
@@ -76,6 +77,11 @@ public:
     void clearUserIR();
     bool hasUserIR() const;
     juce::String getSourceName() const;
+    juce::File getUserIRFile() const;
+
+    /** Sound Brewery IR Library: load entry `index`, or find which entry is loaded (-1 = none). */
+    juce::String loadLibraryIR (int index);
+    int getLibraryIndex() const;
 
     struct Display
     {

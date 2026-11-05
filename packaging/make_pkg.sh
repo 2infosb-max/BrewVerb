@@ -6,7 +6,7 @@
 set -euo pipefail
 
 BUILD_DIR="${1:-build}"
-VERSION="${2:-1.1.0}"
+VERSION="${2:-1.2.0}"
 HERE="$(cd "$(dirname "$0")" && pwd)"
 ART="$(find "$BUILD_DIR" -type d -path '*BrewVerb_artefacts/Release' | head -1)"
 OUT="$BUILD_DIR/installer"
@@ -55,6 +55,24 @@ for entry in "${FORMATS[@]}"; do
         ditto "$root/$name" "$OUT/plugins/BrewVerb $VERSION/$(basename "$(dirname "$bundle")")/$name"
     fi
 done
+
+# ---- Sound Brewery IR Library (impulse responses + pictures) ----------------
+LIB_SRC="$HERE/../library/IR Library"
+LIB_DEST="/Library/Application Support/Sound Brewery/BrewVerb/IR Library"
+if [ -f "$LIB_SRC/library.json" ]; then
+    root="$STAGE/library/root$LIB_DEST"
+    mkdir -p "$root"
+    ditto "$LIB_SRC" "$root"
+    pkgbuild --root "$STAGE/library/root" --identifier "com.soundbrewery.brewverb.library" \
+             --version "$VERSION" --install-location "/" "$OUT/brewverb-library.pkg"
+    OUTLINE+="        <line choice=\"library\"/>"$'\n'
+    CHOICES+="    <choice id=\"library\" title=\"Sound Brewery IR Library (51 IRs with pictures)\" description=\"36 spaces: ADR and film rooms, concert halls and churches, Indian and Kerala spaces, outdoor. Shown in BrewVerb's space browser.\" start_selected=\"true\"><pkg-ref id=\"com.soundbrewery.brewverb.library\"/></choice>"$'\n'
+    REFS+="    <pkg-ref id=\"com.soundbrewery.brewverb.library\" version=\"$VERSION\">brewverb-library.pkg</pkg-ref>"$'\n'
+    BUILT+="library "
+    # drag-and-drop zip gets the library folder too
+    mkdir -p "$OUT/plugins/BrewVerb $VERSION"
+    ditto "$LIB_SRC" "$OUT/plugins/BrewVerb $VERSION/IR Library"
+fi
 
 echo "Formats packaged: $BUILT"
 

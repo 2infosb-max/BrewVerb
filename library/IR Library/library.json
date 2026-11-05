@@ -1,0 +1,760 @@
+{
+ "library": "Sound Brewery IR Library",
+ "version": 1,
+ "note": "Simulated impulse responses (image-source early reflections + diffuse tail). Pictures are model views, not photographs.",
+ "entries": [
+  {
+   "name": "Small Bedroom",
+   "position": "",
+   "category": "ADR & Film Rooms",
+   "description": "Carpeted bedroom with curtains, bed and wardrobe. Close, soft and intimate.",
+   "file": "ADR & Film Rooms/Small Bedroom/Small Bedroom.flac",
+   "picture": "ADR & Film Rooms/Small Bedroom/picture.jpg",
+   "rt60": 0.35,
+   "size": [
+    3.6,
+    3.2,
+    2.8
+   ],
+   "distance": 1.38
+  },
+  {
+   "name": "Kerala Living Room",
+   "position": "",
+   "category": "ADR & Film Rooms",
+   "description": "Vitrified-tile floor, plastered walls, a sofa set and a window. Typical home dialogue.",
+   "file": "ADR & Film Rooms/Kerala Living Room/Kerala Living Room.flac",
+   "picture": "ADR & Film Rooms/Kerala Living Room/picture.jpg",
+   "rt60": 0.61,
+   "size": [
+    5.5,
+    4.5,
+    3.1
+   ],
+   "distance": 1.79
+  },
+  {
+   "name": "Tiled Kitchen",
+   "position": "",
+   "category": "ADR & Film Rooms",
+   "description": "Wall tiles above the counter and a tiled floor. Bright and a little ringy.",
+   "file": "ADR & Film Rooms/Tiled Kitchen/Tiled Kitchen.flac",
+   "picture": "ADR & Film Rooms/Tiled Kitchen/picture.jpg",
+   "rt60": 0.78,
+   "size": [
+    3.8,
+    3.0,
+    2.9
+   ],
+   "distance": 1.23
+  },
+  {
+   "name": "Tiled Bathroom",
+   "position": "",
+   "category": "ADR & Film Rooms",
+   "description": "Fully tiled small bathroom. Hard, bright, short flutter.",
+   "file": "ADR & Film Rooms/Tiled Bathroom/Tiled Bathroom.flac",
+   "picture": "ADR & Film Rooms/Tiled Bathroom/picture.jpg",
+   "rt60": 0.73,
+   "size": [
+    2.4,
+    2.0,
+    2.7
+   ],
+   "distance": 1.04
+  },
+  {
+   "name": "Small Office",
+   "position": "",
+   "category": "ADR & Film Rooms",
+   "description": "Carpet tiles, false ceiling, a glass partition and desks. Dry and controlled.",
+   "file": "ADR & Film Rooms/Small Office/Small Office.flac",
+   "picture": "ADR & Film Rooms/Small Office/picture.jpg",
+   "rt60": 0.3,
+   "size": [
+    4.2,
+    3.6,
+    2.7
+   ],
+   "distance": 1.37
+  },
+  {
+   "name": "Conference Room",
+   "position": "",
+   "category": "ADR & Film Rooms",
+   "description": "Long table, glass walls on two sides. Corporate dialogue scenes.",
+   "file": "ADR & Film Rooms/Conference Room/Conference Room.flac",
+   "picture": "ADR & Film Rooms/Conference Room/picture.jpg",
+   "rt60": 0.36,
+   "size": [
+    9.0,
+    5.5,
+    3.0
+   ],
+   "distance": 2.91
+  },
+  {
+   "name": "Classroom",
+   "position": "",
+   "category": "ADR & Film Rooms",
+   "description": "Kerala school classroom: plaster walls, tile floor, wooden benches, open windows.",
+   "file": "ADR & Film Rooms/Classroom/Classroom.flac",
+   "picture": "ADR & Film Rooms/Classroom/picture.jpg",
+   "rt60": 1.04,
+   "size": [
+    9.0,
+    7.0,
+    3.3
+   ],
+   "distance": 4.36
+  },
+  {
+   "name": "Hospital Corridor",
+   "position": "",
+   "category": "ADR & Film Rooms",
+   "description": "Long vinyl-floored hospital corridor with a false ceiling.",
+   "file": "ADR & Film Rooms/Hospital Corridor/Hospital Corridor.flac",
+   "picture": "ADR & Film Rooms/Hospital Corridor/picture.jpg",
+   "rt60": 0.47,
+   "size": [
+    24.0,
+    2.6,
+    3.0
+   ],
+   "distance": 4.8
+  },
+  {
+   "name": "Concrete Corridor",
+   "position": "",
+   "category": "ADR & Film Rooms",
+   "description": "Bare painted concrete corridor. Long, hard, flutter between walls.",
+   "file": "ADR & Film Rooms/Concrete Corridor/Concrete Corridor.flac",
+   "picture": "ADR & Film Rooms/Concrete Corridor/picture.jpg",
+   "rt60": 2.21,
+   "size": [
+    22.0,
+    2.2,
+    3.0
+   ],
+   "distance": 4.4
+  },
+  {
+   "name": "Concrete Stairwell",
+   "position": "",
+   "category": "ADR & Film Rooms",
+   "description": "Tall concrete stairwell, several floors. Metallic, hollow ring.",
+   "file": "ADR & Film Rooms/Concrete Stairwell/Concrete Stairwell.flac",
+   "picture": "ADR & Film Rooms/Concrete Stairwell/picture.jpg",
+   "rt60": 3.21,
+   "size": [
+    3.2,
+    3.0,
+    14.0
+   ],
+   "distance": 3.21
+  },
+  {
+   "name": "Lift - Elevator",
+   "position": "",
+   "category": "ADR & Film Rooms",
+   "description": "Small steel-walled lift car. Boxy and tight.",
+   "file": "ADR & Film Rooms/Lift - Elevator/Lift - Elevator.flac",
+   "picture": "ADR & Film Rooms/Lift - Elevator/picture.jpg",
+   "rt60": 0.49,
+   "size": [
+    1.6,
+    1.4,
+    2.4
+   ],
+   "distance": 0.77
+  },
+  {
+   "name": "Car Interior",
+   "position": "",
+   "category": "ADR & Film Rooms",
+   "description": "Sedan interior with windows closed. Very short and boxy.",
+   "file": "ADR & Film Rooms/Car Interior/Car Interior.flac",
+   "picture": "ADR & Film Rooms/Car Interior/picture.jpg",
+   "rt60": 0.07,
+   "size": [
+    1.9,
+    1.45,
+    1.15
+   ],
+   "distance": 0.75
+  },
+  {
+   "name": "Empty Warehouse",
+   "position": "Near",
+   "category": "ADR & Film Rooms",
+   "description": "Big empty industrial shed with a metal roof. Long, boomy, slap-back.",
+   "file": "ADR & Film Rooms/Empty Warehouse/Empty Warehouse - Near.flac",
+   "picture": "ADR & Film Rooms/Empty Warehouse/picture.jpg",
+   "rt60": 4.45,
+   "size": [
+    40.0,
+    24.0,
+    10.0
+   ],
+   "distance": 8.83
+  },
+  {
+   "name": "Empty Warehouse",
+   "position": "Far",
+   "category": "ADR & Film Rooms",
+   "description": "Big empty industrial shed with a metal roof. Long, boomy, slap-back.",
+   "file": "ADR & Film Rooms/Empty Warehouse/Empty Warehouse - Far.flac",
+   "picture": "ADR & Film Rooms/Empty Warehouse/picture.jpg",
+   "rt60": 4.46,
+   "size": [
+    40.0,
+    24.0,
+    10.0
+   ],
+   "distance": 27.2
+  },
+  {
+   "name": "Concrete Cell",
+   "position": "",
+   "category": "ADR & Film Rooms",
+   "description": "Small bare concrete room with a steel door. Hard and harsh.",
+   "file": "ADR & Film Rooms/Concrete Cell/Concrete Cell.flac",
+   "picture": "ADR & Film Rooms/Concrete Cell/picture.jpg",
+   "rt60": 1.31,
+   "size": [
+    3.0,
+    2.5,
+    3.2
+   ],
+   "distance": 1.24
+  },
+  {
+   "name": "Shoebox Concert Hall",
+   "position": "Near",
+   "category": "Concert Halls & Churches",
+   "description": "Classic rectangular concert hall, about 1,800 seats, wood-lined walls.",
+   "file": "Concert Halls & Churches/Shoebox Concert Hall/Shoebox Concert Hall - Near.flac",
+   "picture": "Concert Halls & Churches/Shoebox Concert Hall/picture.jpg",
+   "rt60": 2.21,
+   "size": [
+    42.0,
+    25.0,
+    18.0
+   ],
+   "distance": 9.58
+  },
+  {
+   "name": "Shoebox Concert Hall",
+   "position": "Far",
+   "category": "Concert Halls & Churches",
+   "description": "Classic rectangular concert hall, about 1,800 seats, wood-lined walls.",
+   "file": "Concert Halls & Churches/Shoebox Concert Hall/Shoebox Concert Hall - Far.flac",
+   "picture": "Concert Halls & Churches/Shoebox Concert Hall/picture.jpg",
+   "rt60": 2.27,
+   "size": [
+    42.0,
+    25.0,
+    18.0
+   ],
+   "distance": 28.67
+  },
+  {
+   "name": "Chamber Music Hall",
+   "position": "Near",
+   "category": "Concert Halls & Churches",
+   "description": "Small recital hall with a wooden stage and floor, about 300 seats.",
+   "file": "Concert Halls & Churches/Chamber Music Hall/Chamber Music Hall - Near.flac",
+   "picture": "Concert Halls & Churches/Chamber Music Hall/picture.jpg",
+   "rt60": 1.72,
+   "size": [
+    24.0,
+    15.0,
+    10.0
+   ],
+   "distance": 5.39
+  },
+  {
+   "name": "Chamber Music Hall",
+   "position": "Far",
+   "category": "Concert Halls & Churches",
+   "description": "Small recital hall with a wooden stage and floor, about 300 seats.",
+   "file": "Concert Halls & Churches/Chamber Music Hall/Chamber Music Hall - Far.flac",
+   "picture": "Concert Halls & Churches/Chamber Music Hall/picture.jpg",
+   "rt60": 1.69,
+   "size": [
+    24.0,
+    15.0,
+    10.0
+   ],
+   "distance": 16.35
+  },
+  {
+   "name": "Gothic Cathedral",
+   "position": "Near",
+   "category": "Concert Halls & Churches",
+   "description": "Huge stone cathedral with stained glass and wooden pews. Very long, dark tail.",
+   "file": "Concert Halls & Churches/Gothic Cathedral/Gothic Cathedral - Near.flac",
+   "picture": "Concert Halls & Churches/Gothic Cathedral/picture.jpg",
+   "rt60": 7.21,
+   "size": [
+    90.0,
+    30.0,
+    28.0
+   ],
+   "distance": 19.82
+  },
+  {
+   "name": "Gothic Cathedral",
+   "position": "Far",
+   "category": "Concert Halls & Churches",
+   "description": "Huge stone cathedral with stained glass and wooden pews. Very long, dark tail.",
+   "file": "Concert Halls & Churches/Gothic Cathedral/Gothic Cathedral - Far.flac",
+   "picture": "Concert Halls & Churches/Gothic Cathedral/picture.jpg",
+   "rt60": 7.16,
+   "size": [
+    90.0,
+    30.0,
+    28.0
+   ],
+   "distance": 61.2
+  },
+  {
+   "name": "Small Stone Chapel",
+   "position": "Near",
+   "category": "Concert Halls & Churches",
+   "description": "Small stone chapel with a timber roof and a few rows of pews.",
+   "file": "Concert Halls & Churches/Small Stone Chapel/Small Stone Chapel - Near.flac",
+   "picture": "Concert Halls & Churches/Small Stone Chapel/picture.jpg",
+   "rt60": 2.82,
+   "size": [
+    16.0,
+    8.0,
+    9.0
+   ],
+   "distance": 3.53
+  },
+  {
+   "name": "Small Stone Chapel",
+   "position": "Far",
+   "category": "Concert Halls & Churches",
+   "description": "Small stone chapel with a timber roof and a few rows of pews.",
+   "file": "Concert Halls & Churches/Small Stone Chapel/Small Stone Chapel - Far.flac",
+   "picture": "Concert Halls & Churches/Small Stone Chapel/picture.jpg",
+   "rt60": 2.83,
+   "size": [
+    16.0,
+    8.0,
+    9.0
+   ],
+   "distance": 10.88
+  },
+  {
+   "name": "Kerala Church",
+   "position": "Near",
+   "category": "Concert Halls & Churches",
+   "description": "Syro-Malabar style plastered church nave with granite floor and wooden pews.",
+   "file": "Concert Halls & Churches/Kerala Church/Kerala Church - Near.flac",
+   "picture": "Concert Halls & Churches/Kerala Church/picture.jpg",
+   "rt60": 3.58,
+   "size": [
+    38.0,
+    15.0,
+    13.0
+   ],
+   "distance": 8.37
+  },
+  {
+   "name": "Kerala Church",
+   "position": "Far",
+   "category": "Concert Halls & Churches",
+   "description": "Syro-Malabar style plastered church nave with granite floor and wooden pews.",
+   "file": "Concert Halls & Churches/Kerala Church/Kerala Church - Far.flac",
+   "picture": "Concert Halls & Churches/Kerala Church/picture.jpg",
+   "rt60": 3.64,
+   "size": [
+    38.0,
+    15.0,
+    13.0
+   ],
+   "distance": 25.84
+  },
+  {
+   "name": "Proscenium Theatre",
+   "position": "Near",
+   "category": "Concert Halls & Churches",
+   "description": "Traditional theatre with stage curtains and plush seating. Warm and medium length.",
+   "file": "Concert Halls & Churches/Proscenium Theatre/Proscenium Theatre - Near.flac",
+   "picture": "Concert Halls & Churches/Proscenium Theatre/picture.jpg",
+   "rt60": 1.22,
+   "size": [
+    30.0,
+    22.0,
+    14.0
+   ],
+   "distance": 6.78
+  },
+  {
+   "name": "Proscenium Theatre",
+   "position": "Far",
+   "category": "Concert Halls & Churches",
+   "description": "Traditional theatre with stage curtains and plush seating. Warm and medium length.",
+   "file": "Concert Halls & Churches/Proscenium Theatre/Proscenium Theatre - Far.flac",
+   "picture": "Concert Halls & Churches/Proscenium Theatre/picture.jpg",
+   "rt60": 1.24,
+   "size": [
+    30.0,
+    22.0,
+    14.0
+   ],
+   "distance": 20.45
+  },
+  {
+   "name": "Temple Koothambalam",
+   "position": "Near",
+   "category": "Indian & Kerala Spaces",
+   "description": "Kerala temple theatre hall: carved timber roof, laterite walls, granite floor.",
+   "file": "Indian & Kerala Spaces/Temple Koothambalam/Temple Koothambalam - Near.flac",
+   "picture": "Indian & Kerala Spaces/Temple Koothambalam/picture.jpg",
+   "rt60": 1.79,
+   "size": [
+    22.0,
+    14.0,
+    9.0
+   ],
+   "distance": 4.86
+  },
+  {
+   "name": "Temple Koothambalam",
+   "position": "Far",
+   "category": "Indian & Kerala Spaces",
+   "description": "Kerala temple theatre hall: carved timber roof, laterite walls, granite floor.",
+   "file": "Indian & Kerala Spaces/Temple Koothambalam/Temple Koothambalam - Far.flac",
+   "picture": "Indian & Kerala Spaces/Temple Koothambalam/picture.jpg",
+   "rt60": 1.83,
+   "size": [
+    22.0,
+    14.0,
+    9.0
+   ],
+   "distance": 14.96
+  },
+  {
+   "name": "Temple Nalambalam Cloister",
+   "position": "",
+   "category": "Indian & Kerala Spaces",
+   "description": "Covered walkway around a temple sanctum; one side open to the courtyard.",
+   "file": "Indian & Kerala Spaces/Temple Nalambalam Cloister/Temple Nalambalam Cloister.flac",
+   "picture": "Indian & Kerala Spaces/Temple Nalambalam Cloister/picture.jpg",
+   "rt60": 1.43,
+   "size": [
+    32.0,
+    4.0,
+    3.6
+   ],
+   "distance": 8.0
+  },
+  {
+   "name": "Nalukettu Courtyard House",
+   "position": "",
+   "category": "Indian & Kerala Spaces",
+   "description": "Traditional Kerala house with an open central courtyard (nadumuttam).",
+   "file": "Indian & Kerala Spaces/Nalukettu Courtyard House/Nalukettu Courtyard House.flac",
+   "picture": "Indian & Kerala Spaces/Nalukettu Courtyard House/picture.jpg",
+   "rt60": 0.66,
+   "size": [
+    12.0,
+    12.0,
+    6.0
+   ],
+   "distance": 4.24
+  },
+  {
+   "name": "Stone Pillared Mandapam",
+   "position": "Near",
+   "category": "Indian & Kerala Spaces",
+   "description": "Tamil temple hall of carved granite pillars. Dense, hard, long and diffuse.",
+   "file": "Indian & Kerala Spaces/Stone Pillared Mandapam/Stone Pillared Mandapam - Near.flac",
+   "picture": "Indian & Kerala Spaces/Stone Pillared Mandapam/picture.jpg",
+   "rt60": 3.47,
+   "size": [
+    30.0,
+    30.0,
+    7.0
+   ],
+   "distance": 6.66
+  },
+  {
+   "name": "Stone Pillared Mandapam",
+   "position": "Far",
+   "category": "Indian & Kerala Spaces",
+   "description": "Tamil temple hall of carved granite pillars. Dense, hard, long and diffuse.",
+   "file": "Indian & Kerala Spaces/Stone Pillared Mandapam/Stone Pillared Mandapam - Far.flac",
+   "picture": "Indian & Kerala Spaces/Stone Pillared Mandapam/picture.jpg",
+   "rt60": 3.44,
+   "size": [
+    30.0,
+    30.0,
+    7.0
+   ],
+   "distance": 20.41
+  },
+  {
+   "name": "School Hall (Tin Roof)",
+   "position": "Near",
+   "category": "Indian & Kerala Spaces",
+   "description": "Kerala school assembly hall with a sheet-metal roof and open windows.",
+   "file": "Indian & Kerala Spaces/School Hall (Tin Roof)/School Hall (Tin Roof) - Near.flac",
+   "picture": "Indian & Kerala Spaces/School Hall (Tin Roof)/picture.jpg",
+   "rt60": 2.04,
+   "size": [
+    26.0,
+    12.0,
+    6.5
+   ],
+   "distance": 5.73
+  },
+  {
+   "name": "School Hall (Tin Roof)",
+   "position": "Far",
+   "category": "Indian & Kerala Spaces",
+   "description": "Kerala school assembly hall with a sheet-metal roof and open windows.",
+   "file": "Indian & Kerala Spaces/School Hall (Tin Roof)/School Hall (Tin Roof) - Far.flac",
+   "picture": "Indian & Kerala Spaces/School Hall (Tin Roof)/picture.jpg",
+   "rt60": 1.96,
+   "size": [
+    26.0,
+    12.0,
+    6.5
+   ],
+   "distance": 17.68
+  },
+  {
+   "name": "Town Hall Auditorium",
+   "position": "Near",
+   "category": "Indian & Kerala Spaces",
+   "description": "Municipal auditorium with stage, plastic/cushioned chairs and a gypsum ceiling.",
+   "file": "Indian & Kerala Spaces/Town Hall Auditorium/Town Hall Auditorium - Near.flac",
+   "picture": "Indian & Kerala Spaces/Town Hall Auditorium/picture.jpg",
+   "rt60": 1.2,
+   "size": [
+    36.0,
+    22.0,
+    12.0
+   ],
+   "distance": 7.95
+  },
+  {
+   "name": "Town Hall Auditorium",
+   "position": "Far",
+   "category": "Indian & Kerala Spaces",
+   "description": "Municipal auditorium with stage, plastic/cushioned chairs and a gypsum ceiling.",
+   "file": "Indian & Kerala Spaces/Town Hall Auditorium/Town Hall Auditorium - Far.flac",
+   "picture": "Indian & Kerala Spaces/Town Hall Auditorium/picture.jpg",
+   "rt60": 1.18,
+   "size": [
+    36.0,
+    22.0,
+    12.0
+   ],
+   "distance": 24.48
+  },
+  {
+   "name": "Wedding Hall",
+   "position": "Near",
+   "category": "Indian & Kerala Spaces",
+   "description": "Large marriage hall: polished stone floor, plaster walls, rows of chairs.",
+   "file": "Indian & Kerala Spaces/Wedding Hall/Wedding Hall - Near.flac",
+   "picture": "Indian & Kerala Spaces/Wedding Hall/picture.jpg",
+   "rt60": 2.62,
+   "size": [
+    42.0,
+    20.0,
+    8.0
+   ],
+   "distance": 9.26
+  },
+  {
+   "name": "Wedding Hall",
+   "position": "Far",
+   "category": "Indian & Kerala Spaces",
+   "description": "Large marriage hall: polished stone floor, plaster walls, rows of chairs.",
+   "file": "Indian & Kerala Spaces/Wedding Hall/Wedding Hall - Far.flac",
+   "picture": "Indian & Kerala Spaces/Wedding Hall/picture.jpg",
+   "rt60": 2.6,
+   "size": [
+    42.0,
+    20.0,
+    8.0
+   ],
+   "distance": 28.56
+  },
+  {
+   "name": "Single-Screen Cinema",
+   "position": "Near",
+   "category": "Indian & Kerala Spaces",
+   "description": "Old single-screen theatre with curtained walls. Treated and fairly dry.",
+   "file": "Indian & Kerala Spaces/Single-Screen Cinema/Single-Screen Cinema - Near.flac",
+   "picture": "Indian & Kerala Spaces/Single-Screen Cinema/picture.jpg",
+   "rt60": 0.58,
+   "size": [
+    34.0,
+    20.0,
+    11.0
+   ],
+   "distance": 7.67
+  },
+  {
+   "name": "Single-Screen Cinema",
+   "position": "Far",
+   "category": "Indian & Kerala Spaces",
+   "description": "Old single-screen theatre with curtained walls. Treated and fairly dry.",
+   "file": "Indian & Kerala Spaces/Single-Screen Cinema/Single-Screen Cinema - Far.flac",
+   "picture": "Indian & Kerala Spaces/Single-Screen Cinema/picture.jpg",
+   "rt60": 0.58,
+   "size": [
+    34.0,
+    20.0,
+    11.0
+   ],
+   "distance": 23.18
+  },
+  {
+   "name": "Road Tunnel",
+   "position": "Near",
+   "category": "Outdoor & Special",
+   "description": "Concrete road tunnel. Long, rumbling, strong flutter.",
+   "file": "Outdoor & Special/Road Tunnel/Road Tunnel - Near.flac",
+   "picture": "Outdoor & Special/Road Tunnel/picture.jpg",
+   "rt60": 3.5,
+   "size": [
+    90.0,
+    7.0,
+    5.5
+   ],
+   "distance": 19.8
+  },
+  {
+   "name": "Road Tunnel",
+   "position": "Far",
+   "category": "Outdoor & Special",
+   "description": "Concrete road tunnel. Long, rumbling, strong flutter.",
+   "file": "Outdoor & Special/Road Tunnel/Road Tunnel - Far.flac",
+   "picture": "Outdoor & Special/Road Tunnel/picture.jpg",
+   "rt60": 3.48,
+   "size": [
+    90.0,
+    7.0,
+    5.5
+   ],
+   "distance": 61.2
+  },
+  {
+   "name": "Underground Parking",
+   "position": "Near",
+   "category": "Outdoor & Special",
+   "description": "Low-ceilinged basement car park. Long and smeared.",
+   "file": "Outdoor & Special/Underground Parking/Underground Parking - Near.flac",
+   "picture": "Outdoor & Special/Underground Parking/picture.jpg",
+   "rt60": 3.0,
+   "size": [
+    55.0,
+    32.0,
+    2.8
+   ],
+   "distance": 12.14
+  },
+  {
+   "name": "Underground Parking",
+   "position": "Far",
+   "category": "Outdoor & Special",
+   "description": "Low-ceilinged basement car park. Long and smeared.",
+   "file": "Outdoor & Special/Underground Parking/Underground Parking - Far.flac",
+   "picture": "Outdoor & Special/Underground Parking/picture.jpg",
+   "rt60": 3.0,
+   "size": [
+    55.0,
+    32.0,
+    2.8
+   ],
+   "distance": 37.41
+  },
+  {
+   "name": "Metal Water Tank",
+   "position": "",
+   "category": "Outdoor & Special",
+   "description": "Inside an empty steel tank. Metallic, ringing, long.",
+   "file": "Outdoor & Special/Metal Water Tank/Metal Water Tank.flac",
+   "picture": "Outdoor & Special/Metal Water Tank/picture.jpg",
+   "rt60": 5.02,
+   "size": [
+    4.0,
+    4.0,
+    4.0
+   ],
+   "distance": 1.69
+  },
+  {
+   "name": "City Street",
+   "position": "",
+   "category": "Outdoor & Special",
+   "description": "Street between tall buildings, open to the sky. Slap and flutter between facades.",
+   "file": "Outdoor & Special/City Street/City Street.flac",
+   "picture": "Outdoor & Special/City Street/picture.jpg",
+   "rt60": 1.55,
+   "size": [
+    80.0,
+    14.0,
+    22.0
+   ],
+   "distance": 12.5
+  },
+  {
+   "name": "Stone Courtyard",
+   "position": "",
+   "category": "Outdoor & Special",
+   "description": "Enclosed courtyard of stone buildings, open to the sky.",
+   "file": "Outdoor & Special/Stone Courtyard/Stone Courtyard.flac",
+   "picture": "Outdoor & Special/Stone Courtyard/picture.jpg",
+   "rt60": 1.52,
+   "size": [
+    24.0,
+    18.0,
+    12.0
+   ],
+   "distance": 9.14
+  },
+  {
+   "name": "Open Field",
+   "position": "",
+   "category": "Outdoor & Special",
+   "description": "Flat grass field. Ground bounce plus a far tree line. Almost dry.",
+   "file": "Outdoor & Special/Open Field/Open Field.flac",
+   "picture": "Outdoor & Special/Open Field/picture.jpg",
+   "rt60": 0.47,
+   "size": null,
+   "distance": 3.0
+  },
+  {
+   "name": "Forest Clearing",
+   "position": "",
+   "category": "Outdoor & Special",
+   "description": "Clearing surrounded by dense trees. Soft, diffuse, darkish scatter.",
+   "file": "Outdoor & Special/Forest Clearing/Forest Clearing.flac",
+   "picture": "Outdoor & Special/Forest Clearing/picture.jpg",
+   "rt60": 1.05,
+   "size": null,
+   "distance": 3.0
+  },
+  {
+   "name": "Temple Pond (Kulam)",
+   "position": "",
+   "category": "Outdoor & Special",
+   "description": "Stepped laterite temple tank with water below. Open sky, stone slaps across the water.",
+   "file": "Outdoor & Special/Temple Pond (Kulam)/Temple Pond (Kulam).flac",
+   "picture": "Outdoor & Special/Temple Pond (Kulam)/picture.jpg",
+   "rt60": 0.95,
+   "size": null,
+   "distance": 4.0
+  }
+ ]
+}

@@ -6,6 +6,7 @@
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
 #include "SpaceArt.h"
+#include "IRLibrary.h"
 
 static bool writeWav (const juce::File& f, const juce::AudioBuffer<float>& b, double sr)
 {
@@ -228,6 +229,61 @@ int main (int argc, char** argv)
             g.drawText (brew::getSpaceNames()[i], area.reduced (10.0f).removeFromBottom (24.0f), juce::Justification::centredLeft);
         }
         savePng (sheet, "spaces_sheet.png");
+    }
+
+    // Sound Brewery IR Library: point BREWVERB_IR_LIBRARY at library/IR Library to test it
+    if (juce::SystemStats::getEnvironmentVariable ("BREWVERB_IR_LIBRARY", {}).isNotEmpty())
+    {
+        auto& lib = brew::IRLibrary::get();
+        lib.rescan();
+        int missingPics = 0, badFiles = 0;
+        juce::AudioFormatManager fm; fm.registerBasicFormats();
+        for (int i = 0; i < lib.getNumEntries(); ++i)
+        {
+            const auto e = lib.getEntry (i);
+            if (! lib.getPicture (e.picture).isValid()) ++missingPics;
+            std::unique_ptr<juce::AudioFormatReader> r (fm.createReaderFor (e.file));
+            if (r == nullptr || r->numChannels != 2 || r->sampleRate != 48000.0) ++badFiles;
+        }
+        std::printf ("IR library: %d entries in %d categories, missing pictures %d, unreadable %d\n",
+                     lib.getNumEntries(), lib.getCategories().size(), missingPics, badFiles);
+        if (lib.getNumEntries() == 0 || missingPics > 0 || badFiles > 0) ++failures;
+
+        // load an entry through the processor, run audio, check the name and the space it reports
+        BrewVerbProcessor p;
+        p.setRateAndBufferSizeDetails (48000.0, 512);
+        int church = -1;
+        for (int i = 0; i < lib.getNumEntries(); ++i)
+            if (lib.getEntry (i).displayName() == "Kerala Church - Near") church = i;
+        const auto err = p.loadLibraryIR (juce::jmax (0, church));
+        p.prepareToPlay (48000.0, 512);
+        juce::Thread::sleep (400);
+        juce::MessageManager::getInstance()->runDispatchLoopUntil (300);
+        juce::AudioBuffer<float> buf (2, 512); juce::MidiBuffer midi;
+        float peak = 0.0f;
+        for (int b = 0; b < 200; ++b)
+        {
+            buf.clear(); if (b == 0) { buf.setSample (0, 0, 1.0f); buf.setSample (1, 0, 1.0f); }
+            p.processBlock (buf, midi);
+            peak = juce::jmax (peak, buf.getMagnitude (0, 512));
+        }
+        std::printf ("library load: err='%s' index=%d name='%s' RT60 %.2f s peak %.3f\n", err.toRawUTF8(),
+                     p.getLibraryIndex(), p.getSourceName().toRawUTF8(), p.getDisplay().rt60, peak);
+        if (err.isNotEmpty() || p.getLibraryIndex() != juce::jmax (0, church) || ! (peak > 0.0f) || ! std::isfinite (peak)) ++failures;
+
+        // state recall keeps the library space
+        juce::MemoryBlock mb; p.getStateInformation (mb);
+        BrewVerbProcessor q; q.setStateInformation (mb.getData(), (int) mb.getSize());
+        if (q.getLibraryIndex() != p.getLibraryIndex()) { std::printf ("FAIL library state recall\n"); ++failures; }
+
+        if (juce::SystemStats::getEnvironmentVariable ("BREWVERB_UI_SNAPSHOT", {}).isNotEmpty())
+        {
+            std::unique_ptr<juce::AudioProcessorEditor> ed (p.createEditor());
+            ed->setVisible (true);
+            juce::MessageManager::getInstance()->runDispatchLoopUntil (200);
+            juce::PNGImageFormat png; auto f = outDir.getChildFile ("ui_library.png"); f.deleteFile();
+            if (auto os = f.createOutputStream()) png.writeImageToStream (ed->createComponentSnapshot (ed->getLocalBounds(), true, 1.0f), *os);
+        }
     }
 
     std::printf (failures == 0 ? "ALL TESTS PASSED\n" : "%d FAILURES\n", failures);

@@ -5,7 +5,8 @@ By Karun Prasad / Sound Brewery Studio, Kochi. Licensed under GPLv3.
 
 BrewVerb is an independent, from-scratch plug-in in the spirit of Altiverb and PlaceIt. No code or
 impulse responses from either product are used: the 16 built-in spaces are synthesized from
-first principles, and you can load any IR library you own.
+first principles, the bundled Sound Brewery IR Library adds 51 more IRs with a picture of each space,
+and you can load any IR library you own.
 
 ## Features
 
@@ -17,7 +18,8 @@ The layout follows the familiar Altiverb-style workflow. The artwork, branding a
 | **Space picture** | Original illustration of every space with the source and listener drawn in. Click the name to browse by category, use < > to step through spaces, and read the size and RT60 underneath |
 | **Stage pad** | Drag the source left/right and near/far. This changes early/tail balance, reflection timing and stereo image |
 | **16 built-in spaces** | Post: Vocal Booth, Living Room, Office, Car Interior, Long Corridor. Rooms: Small Room, Tiled Bathroom, Concrete Stairwell, Warehouse. Studios: Studio Live Room, Wooden Chamber. Halls: Concert Hall. Churches: Small Church, Cathedral. Gear: Vintage Plate. Outdoor: Courtyard |
-| **Your own IRs** | WAV / AIFF / FLAC, mono, stereo or 4-channel true-stereo, any sample rate. **LOAD IR** or drag the file onto the picture. Every control reshapes them too |
+| **Sound Brewery IR Library** | 51 stereo IRs (48 kHz / 24-bit) from 36 spaces, each shown with a picture of the space and its speaker and mic positions. ADR & Film Rooms (bedroom, Kerala living room, kitchen, bathroom, office, classroom, corridors, stairwell, lift, car, warehouse, concrete cell), Concert Halls & Churches (shoebox hall, chamber hall, cathedral, stone chapel, Kerala church, theatre), Indian & Kerala Spaces (koothambalam, nalambalam, nalukettu, stone mandapam, school hall, town hall, wedding hall, single-screen cinema), Outdoor & Special (tunnel, parking, water tank, street, courtyard, open field, forest, temple pond). Larger spaces have Near and Far positions. Click the space name > SOUND BREWERY IR LIBRARY, or step with < >. Installed by the .pkg (tick "Sound Brewery IR Library") |
+| **Your own IRs** | WAV / AIFF / FLAC, mono, stereo or 4-channel true-stereo, any sample rate. **LOAD IR** or drag the file onto the picture. Every control reshapes them too. A picture placed next to the file (same name, picture.jpg, or the only image in the folder) is shown in the display. Add your own spaces to `~/Library/Application Support/Sound Brewery/BrewVerb/IR Library` and they appear in the browser |
 | **HOME tab** | Brightness, Bass, Treble, Pre-delay, Attack, EQ On |
 | **COLOR tab** | Low Cut, High Cut, Bass, Treble, Brightness, EQ On |
 | **TIME tab** | IR decay display, Size, Length, Attack, Pre-delay, Reverse |
@@ -41,8 +43,8 @@ Every build produces two downloads. Both are universal, so they run on Apple Sil
 
 | Download | What's inside |
 |---|---|
-| `BrewVerb-1.1.0-macOS.pkg` | Installer with a checkbox per format: AAX, AU, VST3, VST, Standalone |
-| `BrewVerb-1.1.0-macOS-plugins.zip` | The plug-in files themselves (`.component`, `.vst3`, `.vst`, `.aaxplugin`) plus a how-to, for drag-and-drop installs |
+| `BrewVerb-1.2.0-macOS.pkg` | Installer with a checkbox per format: AAX, AU, VST3, VST, Standalone |
+| `BrewVerb-1.2.0-macOS-plugins.zip` | The plug-in files themselves (`.component`, `.vst3`, `.vst`, `.aaxplugin`), the IR Library folder and a how-to, for drag-and-drop installs |
 
 **Formats:** AU, VST3 and AAX are always built. **VST (VST2)** is built when you add Steinberg's VST2 SDK,
 which can't be shared publicly; see **[docs/VST2.md](docs/VST2.md)**.
@@ -56,7 +58,7 @@ which can't be shared publicly; see **[docs/VST2.md](docs/VST2.md)**.
 ```bash
 cmake -B build -DCMAKE_BUILD_TYPE=Release
 cmake --build build --parallel
-bash packaging/make_pkg.sh build 1.1.0      # macOS only
+bash packaging/make_pkg.sh build 1.2.0      # macOS only
 # optional VST2: put the SDK in ./vst2sdk or add -DBREWVERB_VST2_SDK=/path/to/sdk
 ```
 
@@ -71,6 +73,8 @@ Source/IRGenerator.*      space synthesis + user-IR reshaping (size/decay/dampin
 Source/PluginProcessor.*  parameters, pre-delay, convolution, filters, width, mix, state
 Source/PluginEditor.*     UI (big Decay, space picture, stage pad, tabs, snapshots)
 Source/SpaceArt.*         original vector illustrations of each space
+Source/IRLibrary.*        Sound Brewery IR Library browser (library.json index + pictures)
+library/IR Library/       the bundled IRs (FLAC 24-bit), their pictures and library.json
 packaging/                .pkg installer (pkgbuild + productbuild)
 .github/workflows/        one-click cloud build
 tests/                    offline render + DSP tests
